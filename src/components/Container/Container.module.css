@@ -1,9 +1,10 @@
 .container {
-  width: 1200px;
-  margin-right: auto;
+  width: 1170px;
+  padding-left: 15px;
+  padding-right: 15px;
+
   margin-left: auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  margin-right: auto;
 }
 body {
   background-color: #f7cac9;

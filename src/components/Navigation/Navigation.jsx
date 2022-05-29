@@ -7,7 +7,7 @@ export const Navigation = () => {
   return (
     <>
       <nav>
-        <NavLink exact to="/home" className={styles.link}>
+        <NavLink exact to="/" className={styles.link}>
           HOME
         </NavLink>
         <NavLink exact to="/movies" className={styles.link}>

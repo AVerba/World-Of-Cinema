@@ -4,6 +4,10 @@ import { Container } from '../../components/Container/Container';
 import { MovieList } from '../../components/MovieList';
 import { useState, useEffect } from 'react';
 import MovieAPI from '../../services/serviceApi';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
+
+import { Notify } from 'notiflix';
+import ImageLoader from '../../components/UI/Loader/Loader';
 
 const Status = {
   IDLE: 'idle',
@@ -12,11 +16,12 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-export const HomePage = () => {
+const HomePage = () => {
   const [trendingMovies, setTrendingMovie] = useState([]);
   const [status, setStatus] = useState(Status.IDLE);
   const [error, setError] = useState(null);
   useEffect(() => {
+    setStatus(Status.PENDING);
     fetchMovies();
   }, []);
   useEffect(() => {
@@ -24,7 +29,6 @@ export const HomePage = () => {
   }, [trendingMovies]);
 
   const fetchMovies = () => {
-    setStatus(Status.PENDING);
     MovieAPI.fetchTrendsMovies()
       .then(({ results }) => {
         const composedMovieData = results.map(
@@ -44,10 +48,11 @@ export const HomePage = () => {
   };
 
   return (
-    <>
-      <Container>
-        <MovieList movies={trendingMovies} />
-      </Container>
-    </>
+    <Container>
+      {status === 'pending' ? <ImageLoader /> : null}
+      {status === 'rejected' ? Notify.warning(`${error.message}`) : null}
+      {status === 'resolved' ? <MovieList movies={trendingMovies} /> : null}
+    </Container>
   );
 };
+export default HomePage;

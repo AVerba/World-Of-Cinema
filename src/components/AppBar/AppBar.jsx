@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { Container } from '../Container/Container';
 import { Navigation } from '../Navigation';
 import { Outlet } from 'react-router-dom';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
 export const AppBar = () => {
   return (

@@ -2,6 +2,10 @@ import styles from './Cast.module.css';
 import { useState, useEffect } from 'react';
 import movieAPI from '../../services/serviceApi';
 import { CastItem } from './CastItem';
+import { Container } from '../Container/Container';
+import ImageLoader from '../UI/Loader/Loader';
+import { Notify } from 'notiflix';
+import { MovieList } from '../MovieList';
 const Status = {
   IDLE: 'idle',
   PENDING: 'pending',
@@ -18,6 +22,7 @@ export const Cast = ({ id }) => {
     searchCast(id);
   }, [id]);
   const searchCast = id => {
+    setStatus(Status.PENDING);
     movieAPI
       .fetchCastMovie(id)
       .then(({ cast }) => {
@@ -32,15 +37,22 @@ export const Cast = ({ id }) => {
       });
   };
   return (
-    <ul className={styles.castList}>
-      {cast ? (
-        cast.map(item => <CastItem item={item} />)
-      ) : (
-        <div className="noCredits">
-          {/*<img width="180px" src={noCredits} alt="no credits" />*/}
-          <p>Sorry no credits available</p>
-        </div>
-      )}
-    </ul>
+    <>
+      {status === 'pending' ? <ImageLoader /> : null}
+      {status === 'rejected' ? Notify.warning(`${error.message}`) : null}
+      {status === 'resolved' ? (
+        <Container>
+          <ul className={styles.castList}>
+            {cast ? (
+              cast.map(item => <CastItem item={item} />)
+            ) : (
+              <div className="noCredits">
+                <p>Sorry no credits available</p>
+              </div>
+            )}
+          </ul>
+        </Container>
+      ) : null}
+    </>
   );
 };

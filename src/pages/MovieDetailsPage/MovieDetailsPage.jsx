@@ -8,6 +8,9 @@ import { MovieDetails } from '../../components/MovieDetail';
 import { Reviews } from '../../components/Reviews';
 import { Cast } from '../../components/Cast';
 import { DetailNavigation } from '../../components/DitailNavigation';
+import { Loading as loading, Notify } from 'notiflix';
+import ImageLoader from '../../components/UI/Loader/Loader';
+import { MovieList } from '../../components/MovieList';
 
 const Status = {
   IDLE: 'idle',
@@ -16,7 +19,7 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-export const MovieDetailsPage = () => {
+const MovieDetailsPage = () => {
   const { movieID } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const [status, setStatus] = useState(Status.IDLE);
@@ -25,6 +28,7 @@ export const MovieDetailsPage = () => {
 
   useEffect(() => {
     searchMovieDetails(movieID);
+    setStatus(Status.PENDING);
   }, [movieID]);
 
   const searchMovieDetails = movieID => {
@@ -33,19 +37,28 @@ export const MovieDetailsPage = () => {
       .then(results => {
         setMovieDetails(results);
         setStatus(Status.RESOLVED);
+        loading.remove();
       })
       .catch(error => {
         setError(error);
         setStatus(Status.REJECTED);
+        loading.remove();
       });
   };
 
   return (
     <>
-      <BackButton />
-      {movieDetails && <MovieDetails {...movieDetails} />}
+      {status === 'pending' ? <ImageLoader /> : null}
+      {status === 'rejected' ? Notify.warning(`${error.message}`) : null}
+      {status === 'resolved' ? (
+        <>
+          <BackButton />
+          {movieDetails && <MovieDetails {...movieDetails} />}
 
-      <DetailNavigation id={movieID} />
+          <DetailNavigation id={movieID} />
+        </>
+      ) : null}
+
       <Routes>
         <Route path="/" element={<Outlet />}>
           <Route path="credits" element={<Cast id={movieID} />} />
@@ -55,3 +68,4 @@ export const MovieDetailsPage = () => {
     </>
   );
 };
+export default MovieDetailsPage;

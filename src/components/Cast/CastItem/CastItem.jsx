@@ -1,5 +1,6 @@
 import styles from './CastItem.module.css';
 import propTypes from 'prop-types';
+import NoPhoto from '../../UI/NoPhoto.png';
 export const CastItem = ({ item }) => {
   const { id, name, character, profile_path } = item;
   return (
@@ -11,8 +12,7 @@ export const CastItem = ({ item }) => {
           alt={name}
         />
       ) : (
-        <div>No Photo</div>
-        // <img className={styles.photo} src={noPhoto} alt={name} />
+        <img className={styles.photo} src={NoPhoto} alt={name} />
       )}
 
       <h3 className={styles.name}>{name}</h3>

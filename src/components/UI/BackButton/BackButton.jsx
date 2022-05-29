@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-
 import { Container } from '../../Container/Container';
+import styles from './BackButton.module.css';
 
 export const BackButton = () => {
   const navigate = useNavigate();
@@ -20,7 +20,12 @@ export const BackButton = () => {
 
   return (
     <Container>
-      <button title="Back" onClick={handleBack} type="button">
+      <button
+        className={styles.backBtn}
+        title="Back"
+        onClick={handleBack}
+        type="button"
+      >
         back
       </button>
     </Container>

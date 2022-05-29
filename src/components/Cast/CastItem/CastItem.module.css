@@ -1,0 +1,21 @@
+.castItem {
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  flex-basis: calc(100% / 4 - 15px);
+  margin-left: 30px;
+  margin-top: 15px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+    1px 4px 6px rgba(0, 0, 0, 0.16);
+}
+
+.photo {
+  display: block;
+  height: auto;
+  width: 100%;
+}

@@ -1,0 +1,8 @@
+.castList {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: calc(-1 * 30px);
+  margin-top: calc(-1 * 15px);
+  align-items: center;
+  justify-content: center;
+}
