@@ -1,5 +1,5 @@
 import styles from './MovieDetailsPage.nodule.css';
-import propTypes from 'prop-types';
+
 import { useState, useEffect } from 'react';
 import { Routes, Route, Outlet, useParams } from 'react-router-dom';
 import { BackButton } from '../../components/UI/BackButton';
@@ -10,7 +10,6 @@ import { Cast } from '../../components/Cast';
 import { DetailNavigation } from '../../components/DitailNavigation';
 import { Loading as loading, Notify } from 'notiflix';
 import ImageLoader from '../../components/UI/Loader/Loader';
-import { MovieList } from '../../components/MovieList';
 
 const Status = {
   IDLE: 'idle',

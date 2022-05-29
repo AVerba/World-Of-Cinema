@@ -49,8 +49,12 @@ export const MovieItem = ({ movie }) => {
   );
 };
 
-// MovieItem.propTypes = {
-//   id: propTypes.number.isRequired,
-//   title: propTypes.string.isRequired,
-//   img: propTypes.string.isRequired,
-// };
+MovieItem.propTypes = {
+  item: propTypes.objectOf(
+    propTypes.shape({
+      id: propTypes.number.isRequired,
+      original_title: propTypes.string.isRequired,
+      poster_path: propTypes.string.isRequired,
+    })
+  ),
+};

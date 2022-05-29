@@ -1,10 +1,8 @@
 import styles from './MoviePage.module.css';
-import propTypes from 'prop-types';
+
 import { useState, useEffect } from 'react';
 import { SearchBar } from '../../components/SearchBar';
 import { useSearchParams } from 'react-router-dom';
-
-import { lazy, Suspense } from 'react';
 
 import { MovieList } from '../../components/MovieList';
 import movieAPI from '../../services/serviceApi';
@@ -29,7 +27,7 @@ const MoviePage = () => {
   useEffect(() => {
     if (query) {
       searchMovie(query);
-      // setStatus(Status.PENDING);
+      setStatus(Status.PENDING);
     }
   }, [query]);
 

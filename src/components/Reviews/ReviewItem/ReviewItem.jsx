@@ -1,6 +1,7 @@
 import styles from './ReviewItem.module.css';
 import propTypes from 'prop-types';
 import NoPhoto from '../../UI/NoPhoto.png';
+import { CastItem } from '../../Cast/CastItem';
 export const ReviewItem = ({ item }) => {
   const { id, author_details, content } = item;
   const { avatar_path, name } = author_details;
@@ -23,4 +24,13 @@ export const ReviewItem = ({ item }) => {
       <p className={styles.review}>{content}</p>
     </li>
   );
+};
+ReviewItem.propTypes = {
+  item: propTypes.objectOf(
+    propTypes.shape({
+      id: propTypes.number.isRequired,
+      author_details: propTypes.object.isRequired,
+      content: propTypes.string.isRequired,
+    })
+  ),
 };

@@ -1,10 +1,9 @@
 import styles from './HomePage.module.css';
-import propTypes from 'prop-types';
+
 import { Container } from '../../components/Container/Container';
 import { MovieList } from '../../components/MovieList';
 import { useState, useEffect } from 'react';
 import MovieAPI from '../../services/serviceApi';
-import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
 import { Notify } from 'notiflix';
 import ImageLoader from '../../components/UI/Loader/Loader';

@@ -1,6 +1,7 @@
 import styles from './CastItem.module.css';
 import propTypes from 'prop-types';
 import NoPhoto from '../../UI/NoPhoto.png';
+
 export const CastItem = ({ item }) => {
   const { id, name, character, profile_path } = item;
   return (
@@ -19,4 +20,14 @@ export const CastItem = ({ item }) => {
       <p className={styles.character}>{character}</p>
     </li>
   );
+};
+CastItem.propTypes = {
+  item: propTypes.objectOf(
+    propTypes.shape({
+      id: propTypes.number.isRequired,
+      name: propTypes.string.isRequired,
+      character: propTypes.string.isRequired,
+      profile_path: propTypes.string.isRequired,
+    })
+  ),
 };

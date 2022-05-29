@@ -1,6 +1,7 @@
 import { Container } from '../Container/Container';
 import commonImage from '../UI/commonImage.png';
 import styles from './MovieDetail.module.css';
+import propTypes from 'prop-types';
 
 export const MovieDetails = ({
   poster_path,
@@ -53,4 +54,11 @@ export const MovieDetails = ({
       </div>
     </Container>
   );
+};
+MovieDetails.propTypes = {
+  genres: propTypes.array.isRequired,
+  title: propTypes.string.isRequired,
+  overview: propTypes.string.isRequired,
+  poster_path: propTypes.string.isRequired,
+  vote_average: propTypes.number.isRequired,
 };

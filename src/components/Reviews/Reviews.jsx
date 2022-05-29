@@ -1,12 +1,12 @@
 import styles from './Reviews.module.css';
 import { useState, useEffect } from 'react';
 import movieAPI from '../../services/serviceApi';
-import { CastItem } from '../Cast/CastItem';
 import { ReviewItem } from './ReviewItem';
 import { Container } from '../Container/Container';
 import ImageLoader from '../UI/Loader/Loader';
 import { Notify } from 'notiflix';
-import { MovieList } from '../MovieList';
+import propTypes from 'prop-types';
+
 const Status = {
   IDLE: 'idle',
   PENDING: 'pending',
@@ -57,4 +57,7 @@ export const Reviews = ({ id }) => {
       ) : null}
     </>
   );
+};
+Reviews.propTypes = {
+  id: propTypes.number.isRequired,
 };

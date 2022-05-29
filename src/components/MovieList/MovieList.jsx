@@ -11,3 +11,10 @@ export const MovieList = ({ movies }) => {
     </ul>
   );
 };
+MovieList.propTypes = {
+  movies: propTypes.arrayOf(
+    propTypes.shape({
+      item: propTypes.object.isRequired,
+    })
+  ),
+};

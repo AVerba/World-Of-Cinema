@@ -1,6 +1,7 @@
 import styles from './DetailNavigation.module.css';
 import { Link } from 'react-router-dom';
 import { Container } from '../Container/Container';
+import propTypes from 'prop-types';
 
 export const DetailNavigation = ({ id }) => {
   return (
@@ -19,4 +20,7 @@ export const DetailNavigation = ({ id }) => {
       </ul>
     </Container>
   );
+};
+DetailNavigation.propTypes = {
+  id: propTypes.number.isRequired,
 };

@@ -5,7 +5,8 @@ import { CastItem } from './CastItem';
 import { Container } from '../Container/Container';
 import ImageLoader from '../UI/Loader/Loader';
 import { Notify } from 'notiflix';
-import { MovieList } from '../MovieList';
+import propTypes from 'prop-types';
+
 const Status = {
   IDLE: 'idle',
   PENDING: 'pending',
@@ -55,4 +56,7 @@ export const Cast = ({ id }) => {
       ) : null}
     </>
   );
+};
+Cast.propTypes = {
+  id: propTypes.number.isRequired,
 };
