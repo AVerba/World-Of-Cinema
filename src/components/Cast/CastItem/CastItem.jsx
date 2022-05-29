@@ -1,0 +1,22 @@
+import styles from './CastItem.module.css';
+import propTypes from 'prop-types';
+export const CastItem = ({ item }) => {
+  const { id, name, character, profile_path } = item;
+  return (
+    <li className={styles.castItem} key={id}>
+      {profile_path ? (
+        <img
+          className={styles.photo}
+          src={`https://themoviedb.org/t/p/w185${profile_path}`}
+          alt={name}
+        />
+      ) : (
+        <div>No Photo</div>
+        // <img className={styles.photo} src={noPhoto} alt={name} />
+      )}
+
+      <h3 className={styles.name}>{name}</h3>
+      <p className={styles.character}>{character}</p>
+    </li>
+  );
+};
