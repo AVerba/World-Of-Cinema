@@ -3,9 +3,9 @@ import { Notify } from 'notiflix';
 
 const { BASE_URL, API_KEY } = apiSettings;
 
-const fetchSearchMovies = async query => {
+const fetchSearchMovies = async (query, currentPage) => {
   const response = await fetch(
-    `${BASE_URL}/search/movie?query=${query}&api_key=${API_KEY}&page=${1}`
+    `${BASE_URL}/search/movie?query=${query}&api_key=${API_KEY}&page=${currentPage}`
   );
 
   if (response.ok) {

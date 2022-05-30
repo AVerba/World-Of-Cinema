@@ -9,6 +9,8 @@ import movieAPI from '../../services/serviceApi';
 import { Container } from '../../components/Container/Container';
 import ImageLoader from '../../components/UI/Loader/Loader';
 import { Notify } from 'notiflix';
+import { ButtonLoad } from '../../components/UI/Button';
+import { Title } from '../../components/UI/Title';
 
 const Status = {
   IDLE: 'idle',
@@ -23,23 +25,31 @@ const MoviePage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [status, setStatus] = useState(Status.IDLE);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalMovie, setTotalMovie] = useState(0);
+
+  const pageHandler = () => {
+    setCurrentPage(currentPage + 1);
+  };
 
   useEffect(() => {
     if (query) {
-      searchMovie(query);
+      searchMovie(query, currentPage);
       setStatus(Status.PENDING);
     }
-  }, [query]);
+  }, [query, currentPage]);
 
   useEffect(() => {
     setSearchParams({ query });
   }, [query, setSearchParams]);
-  const searchMovie = () => {
+  const searchMovie = (query, page) => {
     movieAPI
-      .fetchSearchMovies(query)
-      .then(({ results }) => {
+      .fetchSearchMovies(query, page)
+      .then(({ results, total_results }) => {
+        setSearchResults(searchResults => [...searchResults, ...results]);
+
         setStatus(Status.RESOLVED);
-        setSearchResults(results);
+        setTotalMovie(total_results);
       })
       .catch(error => {
         setError(error);
@@ -52,7 +62,23 @@ const MoviePage = () => {
       <SearchBar onSubmit={setSetSearchQuery} />
       {status === 'pending' ? <ImageLoader /> : null}
       {status === 'rejected' ? Notify.warning(`${error.message}`) : null}
-      {status === 'resolved' ? <MovieList movies={searchResults} /> : null}
+      {status === 'resolved' ? (
+        <>
+          <MovieList movies={searchResults} />
+          {searchResults.length < totalMovie ? (
+            <ButtonLoad
+              className={styles.btnLoad}
+              title="Load more"
+              onClick={pageHandler}
+            />
+          ) : (
+            <Title
+              className={styles.galaryTitle}
+              title="no more images from request"
+            />
+          )}
+        </>
+      ) : null}
     </Container>
   );
 };
