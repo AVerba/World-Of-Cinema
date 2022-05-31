@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/154.f6f7ab4a.chunk.js","mappings":"mLAEA,IAEA,EAFqB","sources":["pages/NotFoundPage/NotFoundPage.jsx"],"sourcesContent":["import styles from './NotFoundPage.module.css';\r\n\r\nconst NotFoundPage = () => {};\r\n\r\nexport default NotFoundPage;\r\n"],"names":[],"sourceRoot":""}
