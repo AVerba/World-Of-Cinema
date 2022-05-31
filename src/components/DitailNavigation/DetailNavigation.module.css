@@ -8,7 +8,7 @@
 .navItem:not(:last-child) {
   margin-right: 30px;
 }
-.navLink {
+.navlink {
   text-decoration: none;
   color: #7c6f6f;
   font-weight: bold;
@@ -16,6 +16,21 @@
   cursor: pointer;
   padding: 6px 22px;
   background-color: #f5f4fa;
+  border-radius: 4px;
+  border: inherit;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+.activeLink {
+  text-decoration: none;
+
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  padding: 6px 22px;
+  background-color: #2196f3;
+  font-size: 14px;
+  color: #e2dada;
   border-radius: 4px;
   border: inherit;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);

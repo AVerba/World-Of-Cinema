@@ -1,5 +1,5 @@
 import styles from './DetailNavigation.module.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Container } from '../Container/Container';
 import propTypes from 'prop-types';
 
@@ -8,14 +8,28 @@ export const DetailNavigation = ({ id }) => {
     <Container>
       <ul className={styles.navList}>
         <li className={styles.navItem}>
-          <Link className={styles.navLink} to={`/movies/${id}/cast`}>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? ['active', styles.activeLink].join(' ')
+                : styles.navlink
+            }
+            to={`/movies/${id}/cast`}
+          >
             Cast
-          </Link>
+          </NavLink>
         </li>
         <li className={styles.navItem}>
-          <Link className={styles.navLink} to={`/movies/${id}/reviews`}>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? ['active', styles.activeLink].join(' ')
+                : styles.navlink
+            }
+            to={`/movies/${id}/reviews`}
+          >
             Reviews
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </Container>

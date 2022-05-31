@@ -2,8 +2,8 @@
   display: flex;
 
   align-items: center;
-  min-height: 80px;
-  margin-bottom: 16px;
+  min-height: 40px;
+  margin-bottom: 25px;
 
   box-shadow: 0px 9px 29px 9px rgba(82, 159, 88, 0.96);
 }
