@@ -2,8 +2,8 @@ import styles from './Cast.module.css';
 import { useState, useEffect } from 'react';
 import movieAPI from '../../services/serviceApi';
 import { CastItem } from './CastItem';
-import { Container } from '../Container/Container';
-import ImageLoader from '../UI/Loader/Loader';
+import { Container } from '../../components/Container/Container';
+import ImageLoader from '../../components/UI/Loader/Loader';
 import { Notify } from 'notiflix';
 import propTypes from 'prop-types';
 
@@ -14,7 +14,7 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-export const Cast = ({ id }) => {
+const Cast = ({ id }) => {
   const [cast, setCast] = useState([]);
   const [status, setStatus] = useState(Status.IDLE);
   const [error, setError] = useState(null);
@@ -29,8 +29,6 @@ export const Cast = ({ id }) => {
       .then(({ cast }) => {
         setCast(cast);
         setStatus(Status.RESOLVED);
-        console.log(id);
-        console.log(cast);
       })
       .catch(error => {
         setError(error);
@@ -45,7 +43,7 @@ export const Cast = ({ id }) => {
         <Container>
           <ul className={styles.castList}>
             {cast ? (
-              cast.map(item => <CastItem item={item} />)
+              cast.map(item => <CastItem key={item.id} item={item} />)
             ) : (
               <div className="noCredits">
                 <p>Sorry no credits available</p>
@@ -58,5 +56,6 @@ export const Cast = ({ id }) => {
   );
 };
 Cast.propTypes = {
-  id: propTypes.number.isRequired,
+  id: propTypes.string.isRequired,
 };
+export default Cast;

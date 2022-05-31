@@ -2,9 +2,13 @@ import { useState } from 'react';
 import styles from './SearchBar.module.css';
 import PropTypes from 'prop-types';
 import { Notify } from 'notiflix';
+import { useSearchParams } from 'react-router-dom';
 
 export const SearchBar = ({ onSubmit }) => {
-  const [searchQuery, setSetSearchQuery] = useState('');
+  const [searchParam, setSearchParams] = useSearchParams({});
+  const [searchQuery, setSetSearchQuery] = useState(
+    searchParam.get('query') ?? ''
+  );
 
   const searchSubmitHandler = event => {
     event.preventDefault();

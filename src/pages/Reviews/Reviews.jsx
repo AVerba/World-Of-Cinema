@@ -2,8 +2,8 @@ import styles from './Reviews.module.css';
 import { useState, useEffect } from 'react';
 import movieAPI from '../../services/serviceApi';
 import { ReviewItem } from './ReviewItem';
-import { Container } from '../Container/Container';
-import ImageLoader from '../UI/Loader/Loader';
+import { Container } from '../../components/Container/Container';
+import ImageLoader from '../../components/UI/Loader/Loader';
 import { Notify } from 'notiflix';
 import propTypes from 'prop-types';
 
@@ -14,7 +14,7 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-export const Reviews = ({ id }) => {
+const Reviews = ({ id }) => {
   const [reviews, setReviews] = useState([]);
   const [status, setStatus] = useState(Status.IDLE);
   const [error, setError] = useState(null);
@@ -29,8 +29,6 @@ export const Reviews = ({ id }) => {
       .then(({ results }) => {
         setReviews(results);
         setStatus(Status.RESOLVED);
-        console.log(id);
-        console.log(results);
       })
       .catch(error => {
         setError(error);
@@ -45,7 +43,7 @@ export const Reviews = ({ id }) => {
         <Container>
           <ul className={styles.reviewsList}>
             {reviews ? (
-              reviews.map(item => <ReviewItem item={item} />)
+              reviews.map(item => <ReviewItem key={item.id} item={item} />)
             ) : (
               <div className="noReviews">
                 {/*<img width="180px" src={noCredits} alt="no credits" />*/}
@@ -59,5 +57,6 @@ export const Reviews = ({ id }) => {
   );
 };
 Reviews.propTypes = {
-  id: propTypes.number.isRequired,
+  id: propTypes.string.isRequired,
 };
+export default Reviews;

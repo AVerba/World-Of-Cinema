@@ -1,16 +1,15 @@
 import styles from './Navigation.module.css';
-import propTypes from 'prop-types';
 
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const Navigation = () => {
   return (
     <>
       <nav>
-        <NavLink exact to="/" className={styles.link}>
+        <NavLink exact="true" to="/" className={styles.link}>
           HOME
         </NavLink>
-        <NavLink exact to="/movies" className={styles.link}>
+        <NavLink exact="true" to="/movies" className={styles.link}>
           MOVIES
         </NavLink>
       </nav>

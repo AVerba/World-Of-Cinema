@@ -1,15 +1,19 @@
-import styles from './MovieDetailsPage.nodule.css';
+import styles from './MovieDetailsPage.module.css';
 
 import { useState, useEffect } from 'react';
 import { Routes, Route, Outlet, useParams } from 'react-router-dom';
 import { BackButton } from '../../components/UI/BackButton';
-import movieAPI, { fetchMovieDetails } from '../../services/serviceApi';
+import movieAPI from '../../services/serviceApi';
 import { MovieDetails } from '../../components/MovieDetail';
-import { Reviews } from '../../components/Reviews';
-import { Cast } from '../../components/Cast';
+// import { Reviews } from '../Reviews';
+// import { Cast } from '../Cast';
+import { lazy, Suspense } from 'react';
 import { DetailNavigation } from '../../components/DitailNavigation';
 import { Loading as loading, Notify } from 'notiflix';
 import ImageLoader from '../../components/UI/Loader/Loader';
+
+const Cast = lazy(() => import('../Cast/Cast'));
+const Reviews = lazy(() => import('../Reviews/Reviews'));
 
 const Status = {
   IDLE: 'idle',
@@ -23,7 +27,6 @@ const MovieDetailsPage = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const [status, setStatus] = useState(Status.IDLE);
   const [error, setError] = useState(null);
-  console.log(movieID);
 
   useEffect(() => {
     searchMovieDetails(movieID);
@@ -36,12 +39,10 @@ const MovieDetailsPage = () => {
       .then(results => {
         setMovieDetails(results);
         setStatus(Status.RESOLVED);
-        loading.remove();
       })
       .catch(error => {
         setError(error);
         setStatus(Status.REJECTED);
-        loading.remove();
       });
   };
 
@@ -57,13 +58,14 @@ const MovieDetailsPage = () => {
           <DetailNavigation id={movieID} />
         </>
       ) : null}
-
-      <Routes>
-        <Route path="/" element={<Outlet />}>
-          <Route path="credits" element={<Cast id={movieID} />} />
-          <Route path="reviews" element={<Reviews id={movieID} />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={<ImageLoader />}>
+        <Routes>
+          <Route path="/" element={<Outlet />}>
+            <Route path="cast" element={<Cast id={movieID} />} />
+            <Route path="reviews" element={<Reviews id={movieID} />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </>
   );
 };

@@ -1,5 +1,3 @@
-import styles from './HomePage.module.css';
-
 import { Container } from '../../components/Container/Container';
 import { MovieList } from '../../components/MovieList';
 import { useState, useEffect } from 'react';
@@ -23,18 +21,16 @@ const HomePage = () => {
     setStatus(Status.PENDING);
     fetchMovies();
   }, []);
-  useEffect(() => {
-    // console.log(trendingMovies);
-  }, [trendingMovies]);
 
   const fetchMovies = () => {
     MovieAPI.fetchTrendsMovies()
       .then(({ results }) => {
         const composedMovieData = results.map(
-          ({ id, original_title, poster_path }) => ({
+          ({ id, original_title, poster_path, backdrop_path }) => ({
             id,
             original_title,
             poster_path,
+            backdrop_path,
           })
         );
         setTrendingMovie(composedMovieData);

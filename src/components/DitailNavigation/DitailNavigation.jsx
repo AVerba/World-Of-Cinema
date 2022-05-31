@@ -8,8 +8,8 @@ export const DetailNavigation = ({ id }) => {
     <Container>
       <ul className={styles.navList}>
         <li className={styles.navItem}>
-          <Link className={styles.navLink} to={`/movies/${id}/credits`}>
-            Credits
+          <Link className={styles.navLink} to={`/movies/${id}/cast`}>
+            Cast
           </Link>
         </li>
         <li className={styles.navItem}>
@@ -22,5 +22,5 @@ export const DetailNavigation = ({ id }) => {
   );
 };
 DetailNavigation.propTypes = {
-  id: propTypes.number.isRequired,
+  id: propTypes.string.isRequired,
 };

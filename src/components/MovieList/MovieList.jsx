@@ -6,15 +6,15 @@ export const MovieList = ({ movies }) => {
   return (
     <ul className={styles.movieList}>
       {movies.map(item => (
-        <MovieItem movie={item} />
+        <MovieItem key={item.id} movie={item} />
       ))}
     </ul>
   );
 };
-MovieList.propTypes = {
-  movies: propTypes.arrayOf(
-    propTypes.shape({
-      item: propTypes.object.isRequired,
-    })
-  ),
-};
+// MovieList.propTypes = {
+//   movies: propTypes.arrayOf(
+//     propTypes.shape({
+//       item: propTypes.object.isRequired,
+//     })
+//   ),
+// };

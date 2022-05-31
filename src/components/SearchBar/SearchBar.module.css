@@ -16,7 +16,7 @@
   align-items: center;
   width: 100%;
   max-width: 600px;
-  background-color: #f7cac9;
+  background-color: inherit;
   border-radius: 3px;
   overflow: hidden;
 }

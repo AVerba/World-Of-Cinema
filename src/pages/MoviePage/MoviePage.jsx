@@ -22,31 +22,37 @@ const Status = {
 const MoviePage = () => {
   const [searchParam, setSearchParams] = useSearchParams({});
   const [query, setSetSearchQuery] = useState(searchParam.get('query') ?? '');
-  const [searchResults, setSearchResults] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState(Status.IDLE);
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [page, setPage] = useState(searchParam.get('page') ?? 1);
   const [totalMovie, setTotalMovie] = useState(0);
 
   const pageHandler = () => {
-    setCurrentPage(currentPage + 1);
+    setPage(page + 1);
+  };
+  const SubmitSearchHandler = query => {
+    setMovies([]);
+    setTotalMovie(0);
+    setPage(1);
+    setSetSearchQuery(query);
   };
 
   useEffect(() => {
     if (query) {
-      searchMovie(query, currentPage);
+      searchMovie(query, page);
       setStatus(Status.PENDING);
     }
-  }, [query, currentPage]);
+  }, [query, page]);
 
   useEffect(() => {
-    setSearchParams({ query });
-  }, [query, setSearchParams]);
+    setSearchParams({ query, page });
+  }, [query, page]);
   const searchMovie = (query, page) => {
     movieAPI
       .fetchSearchMovies(query, page)
       .then(({ results, total_results }) => {
-        setSearchResults(searchResults => [...searchResults, ...results]);
+        setMovies(movies => [...movies, ...results]);
 
         setStatus(Status.RESOLVED);
         setTotalMovie(total_results);
@@ -59,26 +65,34 @@ const MoviePage = () => {
 
   return (
     <Container>
-      <SearchBar onSubmit={setSetSearchQuery} />
-      {status === 'pending' ? <ImageLoader /> : null}
-      {status === 'rejected' ? Notify.warning(`${error.message}`) : null}
-      {status === 'resolved' ? (
-        <>
-          <MovieList movies={searchResults} />
-          {searchResults.length < totalMovie ? (
-            <ButtonLoad
-              className={styles.btnLoad}
-              title="Load more"
-              onClick={pageHandler}
-            />
-          ) : (
-            <Title
-              className={styles.galaryTitle}
-              title="no more images from request"
-            />
-          )}
-        </>
-      ) : null}
+      <div className={styles.movies}>
+        <SearchBar onSubmit={SubmitSearchHandler} />
+        {status === 'idle' ? (
+          <Title
+            className={styles.galaryTitle}
+            title="No search results yet. Please enter a request"
+          />
+        ) : null}
+        {status === 'pending' ? <ImageLoader /> : null}
+        {status === 'rejected' ? Notify.warning(`${error.message}`) : null}
+        {status === 'resolved' ? (
+          <>
+            <MovieList movies={movies} />
+            {movies.length < totalMovie ? (
+              <ButtonLoad
+                className={styles.btnLoad}
+                title="Load more"
+                onClick={pageHandler}
+              />
+            ) : (
+              <Title
+                className={styles.galaryTitle}
+                title="no more images from request"
+              />
+            )}
+          </>
+        ) : null}
+      </div>
     </Container>
   );
 };

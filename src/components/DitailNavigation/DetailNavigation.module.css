@@ -9,6 +9,9 @@
   margin-right: 30px;
 }
 .navLink {
+  text-decoration: none;
+  color: #7c6f6f;
+  font-weight: bold;
   text-align: center;
   cursor: pointer;
   padding: 6px 22px;

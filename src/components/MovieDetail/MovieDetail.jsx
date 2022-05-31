@@ -9,6 +9,7 @@ export const MovieDetails = ({
   genres,
   overview,
   vote_average,
+  backdrop_path,
 }) => {
   const commonGanres = [];
   genres.map(item => {
@@ -17,7 +18,12 @@ export const MovieDetails = ({
 
   return (
     <Container>
-      <div className={styles.movieDetail}>
+      <div
+        className={styles.movieDetail}
+        style={{
+          backgroundImage: `linear-gradient(90deg, rgba(0,0,0,1) 19%, rgba(113,69,69,0.5441526952577906) 50%, rgba(252,176,69,0.009138689655549759) 100%), url("https://themoviedb.org/t/p/w1280${backdrop_path}")`,
+        }}
+      >
         <div className={styles.imageTumb}>
           {poster_path !== null ? (
             <picture>

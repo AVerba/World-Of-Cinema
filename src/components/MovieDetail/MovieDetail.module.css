@@ -1,15 +1,33 @@
 .movieDetail {
+  color: #e2dada;
+
+  position: relative;
   display: flex;
   padding: 30px 30px;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
-    1px 4px 6px rgba(0, 0, 0, 0.16);
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(31, 11, 21, 1) 20%,
+    rgba(118, 215, 235, 0) 79%
+  );
+  box-shadow: 0px 2px 29px 13px #767637;
+  margin: 30px 0;
 }
 .imageTumb {
   width: 300px;
   margin-right: 30px;
 }
 .poster {
+  top: 0;
+  left: 0;
   display: block;
   height: auto;
   width: 300px;
+}
+.infoTumb {
+  display: flex;
+  flex-direction: column;
 }

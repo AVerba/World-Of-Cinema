@@ -26,7 +26,7 @@ export const BackButton = () => {
         onClick={handleBack}
         type="button"
       >
-        back
+        Back
       </button>
     </Container>
   );
