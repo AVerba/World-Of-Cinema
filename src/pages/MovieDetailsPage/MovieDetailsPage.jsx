@@ -61,8 +61,8 @@ const MovieDetailsPage = () => {
       <Suspense fallback={<ImageLoader />}>
         <Routes>
           <Route path="/" element={<Outlet />}>
-            <Route path="cast" element={<Cast id={movieID} />} />
-            <Route path="reviews" element={<Reviews id={movieID} />} />
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
           </Route>
         </Routes>
       </Suspense>

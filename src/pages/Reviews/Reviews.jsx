@@ -6,6 +6,7 @@ import { Container } from '../../components/Container/Container';
 import ImageLoader from '../../components/UI/Loader/Loader';
 import { Notify } from 'notiflix';
 import propTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 
 const Status = {
   IDLE: 'idle',
@@ -14,18 +15,19 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-const Reviews = ({ id }) => {
+const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [status, setStatus] = useState(Status.IDLE);
   const [error, setError] = useState(null);
+  const { movieID } = useParams();
 
   useEffect(() => {
-    searchReviews(id);
+    searchReviews(movieID);
     setStatus(Status.PENDING);
-  }, [id]);
-  const searchReviews = id => {
+  }, [movieID]);
+  const searchReviews = movieID => {
     movieAPI
-      .fetchReviewsMovies(id)
+      .fetchReviewsMovies(movieID)
       .then(({ results }) => {
         setReviews(results);
         setStatus(Status.RESOLVED);
@@ -42,12 +44,15 @@ const Reviews = ({ id }) => {
       {status === 'resolved' ? (
         <Container>
           <ul className={styles.reviewsList}>
-            {reviews ? (
+            {reviews.length > 0 ? (
               reviews.map(item => <ReviewItem key={item.id} item={item} />)
             ) : (
               <div className="noReviews">
                 {/*<img width="180px" src={noCredits} alt="no credits" />*/}
-                <p>Sorry no credits available</p>
+                <p>
+                  Sorry, we didn't find any reviews for this movie. You can be
+                  the first
+                </p>
               </div>
             )}
           </ul>

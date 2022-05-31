@@ -6,6 +6,7 @@ import { Container } from '../../components/Container/Container';
 import ImageLoader from '../../components/UI/Loader/Loader';
 import { Notify } from 'notiflix';
 import propTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 
 const Status = {
   IDLE: 'idle',
@@ -14,18 +15,19 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-const Cast = ({ id }) => {
+const Cast = () => {
   const [cast, setCast] = useState([]);
   const [status, setStatus] = useState(Status.IDLE);
   const [error, setError] = useState(null);
+  const { movieID } = useParams();
 
   useEffect(() => {
-    searchCast(id);
-  }, [id]);
+    searchCast(movieID);
+  }, [movieID]);
   const searchCast = id => {
     setStatus(Status.PENDING);
     movieAPI
-      .fetchCastMovie(id)
+      .fetchCastMovie(movieID)
       .then(({ cast }) => {
         setCast(cast);
         setStatus(Status.RESOLVED);
@@ -42,7 +44,7 @@ const Cast = ({ id }) => {
       {status === 'resolved' ? (
         <Container>
           <ul className={styles.castList}>
-            {cast ? (
+            {cast.length > 0 ? (
               cast.map(item => <CastItem key={item.id} item={item} />)
             ) : (
               <div className="noCredits">
