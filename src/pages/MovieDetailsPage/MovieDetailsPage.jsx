@@ -5,11 +5,10 @@ import { Routes, Route, Outlet, useParams } from 'react-router-dom';
 import { BackButton } from '../../components/UI/BackButton';
 import movieAPI from '../../services/serviceApi';
 import { MovieDetails } from '../../components/MovieDetail';
-// import { Reviews } from '../Reviews';
-// import { Cast } from '../Cast';
+
 import { lazy, Suspense } from 'react';
 import { DetailNavigation } from '../../components/DitailNavigation';
-import { Loading as loading, Notify } from 'notiflix';
+import { Notify } from 'notiflix';
 import ImageLoader from '../../components/UI/Loader/Loader';
 
 const Cast = lazy(() => import('../Cast/Cast'));
