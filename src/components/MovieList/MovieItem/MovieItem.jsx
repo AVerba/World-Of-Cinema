@@ -3,9 +3,9 @@ import propTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 import commonImage from '../../UI/commonImage.png';
 
-export const MovieItem = ({ movie }) => {
+export const MovieItem = ({ id, poster, title }) => {
   const location = useLocation();
-  const { id, poster_path, original_title } = movie;
+  // const { id, poster_path, original_title } = movie;
 
   return (
     <li className={styles.item}>
@@ -15,21 +15,21 @@ export const MovieItem = ({ movie }) => {
         className={styles.link}
       >
         <div className={styles.poster}>
-          {poster_path !== null ? (
+          {poster !== null ? (
             <picture>
               <source
-                srcSet={`https://themoviedb.org/t/p/w500${poster_path}`}
+                srcSet={`https://themoviedb.org/t/p/w500${poster}`}
                 media="(min-width: 1024px)"
               />
               <source
-                srcSet={`https://themoviedb.org/t/p/w342${poster_path}`}
+                srcSet={`https://themoviedb.org/t/p/w342${poster}`}
                 media="(min-width: 768px)"
               />
               <img
-                alt={original_title}
+                alt={title}
                 className={styles.itemImage}
                 loading="lazy"
-                src={`https://themoviedb.org/t/p/w342${poster_path}`}
+                src={`https://themoviedb.org/t/p/w342${poster}`}
               />
             </picture>
           ) : (
@@ -42,7 +42,7 @@ export const MovieItem = ({ movie }) => {
           )}
         </div>
         <div className={styles.title}>
-          <h3 className={styles.title}>{original_title}</h3>
+          <h3 className={styles.title}>{title}</h3>
         </div>
       </Link>
     </li>
@@ -50,11 +50,7 @@ export const MovieItem = ({ movie }) => {
 };
 
 MovieItem.propTypes = {
-  item: propTypes.objectOf(
-    propTypes.shape({
-      id: propTypes.number.isRequired,
-      original_title: propTypes.string.isRequired,
-      poster_path: propTypes.string.isRequired,
-    })
-  ),
+  id: propTypes.number.isRequired,
+  title: propTypes.string.isRequired,
+  poster: propTypes.string,
 };

@@ -2,14 +2,13 @@ import styles from './CastItem.module.css';
 import propTypes from 'prop-types';
 import NoPhoto from '../../../components/UI/NoPhoto.png';
 
-export const CastItem = ({ item }) => {
-  const { id, name, character, profile_path } = item;
+export const CastItem = ({ name, character, profile }) => {
   return (
-    <li className={styles.castItem} key={id}>
-      {profile_path ? (
+    <li className={styles.castItem}>
+      {profile ? (
         <img
           className={styles.photo}
-          src={`https://themoviedb.org/t/p/w185${profile_path}`}
+          src={`https://themoviedb.org/t/p/w185${profile}`}
           alt={name}
         />
       ) : (
@@ -21,13 +20,8 @@ export const CastItem = ({ item }) => {
     </li>
   );
 };
-// CastItem.propTypes = {
-//   item: propTypes.objectOf(
-//     propTypes.shape({
-//       id: propTypes.number.isRequired,
-//       name: propTypes.string.isRequired,
-//       character: propTypes.string.isRequired,
-//       profile_path: propTypes.string.isRequired,
-//     })
-//   ),
-// };
+CastItem.propTypes = {
+  name: propTypes.string.isRequired,
+  character: propTypes.string.isRequired,
+  profile: propTypes.string,
+};

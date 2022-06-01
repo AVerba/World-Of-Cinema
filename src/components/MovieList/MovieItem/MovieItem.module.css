@@ -1,6 +1,7 @@
 .item {
   border-radius: 2px;
   box-shadow: 0px 4px 25px 9px rgba(202, 104, 83, 0.2);
+  background-color: #fff;
 }
 
 .link {
@@ -21,6 +22,7 @@
 
 .itemImage {
   width: 100%;
+  display: inline-block;
 
   object-fit: cover;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);

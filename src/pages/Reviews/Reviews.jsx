@@ -45,7 +45,15 @@ const Reviews = () => {
         <Container>
           <ul className={styles.reviewsList}>
             {reviews.length > 0 ? (
-              reviews.map(item => <ReviewItem key={item.id} item={item} />)
+              reviews.map(item => (
+                <ReviewItem
+                  key={item.id}
+                  avatar={item.author_details.avatar_path}
+                  username={item.author_details.username}
+                  content={item.content}
+                  item={item}
+                />
+              ))
             ) : (
               <div className="noReviews">
                 {/*<img width="180px" src={noCredits} alt="no credits" />*/}
@@ -61,7 +69,5 @@ const Reviews = () => {
     </>
   );
 };
-Reviews.propTypes = {
-  id: propTypes.string.isRequired,
-};
+
 export default Reviews;

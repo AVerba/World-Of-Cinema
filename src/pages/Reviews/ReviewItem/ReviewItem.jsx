@@ -2,28 +2,26 @@ import styles from './ReviewItem.module.css';
 import propTypes from 'prop-types';
 import NoPhoto from '../../../components/UI/commonUser.png';
 
-export const ReviewItem = ({ item }) => {
-  const { id, author_details, content } = item;
-  const { avatar_path, name } = author_details;
+export const ReviewItem = ({ author, content, username, avatar }) => {
   const addDefaultSrc = event => {
     event.target.src = NoPhoto;
   };
 
   return (
-    <li className={styles.reviewItem} key={id}>
+    <li className={styles.reviewItem}>
       <div className={styles.userInfo}>
-        {avatar_path ? (
+        {avatar ? (
           <img
             className={styles.avatar}
-            src={`https://themoviedb.org/t/p/w185${avatar_path}`}
-            alt={name}
+            src={`https://themoviedb.org/t/p/w185${avatar}`}
+            alt={username}
             onError={addDefaultSrc}
           />
         ) : (
-          <img className={styles.avatar} src={NoPhoto} alt={name} />
+          <img className={styles.avatar} src={NoPhoto} alt={username} />
         )}
-        {name ? (
-          <h4 className={styles.name}>{name}</h4>
+        {username ? (
+          <h4 className={styles.name}>{username}</h4>
         ) : (
           <h4 className={styles.name}>Anonymous</h4>
         )}
@@ -33,12 +31,8 @@ export const ReviewItem = ({ item }) => {
     </li>
   );
 };
-// ReviewItem.propTypes = {
-//   item: propTypes.objectOf(
-//     propTypes.shape({
-//       id: propTypes.number.isRequired,
-//       author_details: propTypes.object.isRequired,
-//       content: propTypes.string.isRequired,
-//     })
-//   ),
-// };
+ReviewItem.propTypes = {
+  avatar_path: propTypes.string,
+  username: propTypes.string,
+  content: propTypes.string.isRequired,
+};

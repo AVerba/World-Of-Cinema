@@ -53,7 +53,16 @@ const MovieDetailsPage = () => {
       {status === 'resolved' ? (
         <>
           <BackButton />
-          {movieDetails && <MovieDetails {...movieDetails} />}
+          {movieDetails && (
+            <MovieDetails
+              poster={movieDetails.poster_path}
+              title={movieDetails.title}
+              genres={movieDetails.genres}
+              overview={movieDetails.overview}
+              vote={movieDetails.vote_average}
+              backdrop={movieDetails.backdrop_path}
+            />
+          )}
 
           <DetailNavigation id={movieID} />
         </>

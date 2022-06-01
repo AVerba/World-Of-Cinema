@@ -45,7 +45,14 @@ const Cast = () => {
         <Container>
           <ul className={styles.castList}>
             {cast.length > 0 ? (
-              cast.map(item => <CastItem key={item.id} item={item} />)
+              cast.map(item => (
+                <CastItem
+                  key={item.id}
+                  profile={item.profile_path}
+                  character={item.character}
+                  name={item.name}
+                />
+              ))
             ) : (
               <div className="noCredits">
                 <p>Sorry no credits available</p>
@@ -57,7 +64,5 @@ const Cast = () => {
     </>
   );
 };
-Cast.propTypes = {
-  id: propTypes.string.isRequired,
-};
+
 export default Cast;
