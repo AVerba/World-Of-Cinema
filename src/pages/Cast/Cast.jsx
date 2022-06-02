@@ -54,9 +54,7 @@ const Cast = () => {
                 />
               ))
             ) : (
-              <div className="noCredits">
-                <p>Sorry no credits available</p>
-              </div>
+              <p className="noCredits">Sorry no credits available</p>
             )}
           </ul>
         </Container>

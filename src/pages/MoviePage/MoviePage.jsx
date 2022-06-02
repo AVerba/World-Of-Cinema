@@ -41,14 +41,15 @@ const MoviePage = () => {
   useEffect(() => {
     if (query) {
       searchMovie(query, page);
-      setStatus(Status.PENDING);
     }
+    setSearchParams({ query, page });
   }, [query, page]);
 
   useEffect(() => {
     setSearchParams({ query, page });
   }, [query, page]);
   const searchMovie = (query, page) => {
+    setStatus(Status.PENDING);
     movieAPI
       .fetchSearchMovies(query, page)
       .then(({ results, total_results }) => {

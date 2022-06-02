@@ -1,4 +1,4 @@
-import styles from './Button.module.css';
+import styles from './ButtonLoad.module.css';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 

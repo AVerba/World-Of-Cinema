@@ -14,9 +14,10 @@ export const CastItem = ({ name, character, profile }) => {
       ) : (
         <img className={styles.photo} src={NoPhoto} alt={name} />
       )}
-
-      <h3 className={styles.name}>{name}</h3>
-      <p className={styles.character}>{character}</p>
+      <div className={styles.info}>
+        <h4 className={styles.name}>{name}</h4>
+        <p className={styles.character}>{character}</p>
+      </div>
     </li>
   );
 };

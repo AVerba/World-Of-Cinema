@@ -1,5 +1,8 @@
 @import-normalize; /* bring in normalize.css styles */
-
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
 body {
   height: 100vh;
   background: linear-gradient(
